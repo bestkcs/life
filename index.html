@@ -29,9 +29,16 @@
             fbq('init', '2917139468490883');
             fbq('track', 'PageView');
 
-            // Отслеживание события "Lead" при нажатии на кнопку
-            document.querySelector('.tgme_action_button_new').addEventListener('click', function() {
-                fbq('track', 'Lead');
+            // Оборачиваем обработчик клика в DOMContentLoaded
+            document.addEventListener('DOMContentLoaded', function() {
+                const button = document.querySelector('.tgme_action_button_new');
+                if (button) {
+                    button.addEventListener('click', function() {
+                        fbq('track', 'Lead');
+                    });
+                } else {
+                    console.log('Button not found');
+                }
             });
         </script>
         <noscript>
